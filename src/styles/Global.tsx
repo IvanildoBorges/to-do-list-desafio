@@ -21,7 +21,7 @@ const rootConfig = globalStyle`
         /* Produto */
         --primaria: #FC6E51;
         --secundaria: #8284FA;
-        --primaria-dark: #1E6F9F;
+        --primaria-dark: #9f581e;
         --secundaria-dark: #5E60CE;
 
         /* Escala de Cinza */
@@ -64,6 +64,10 @@ const rootConfig = globalStyle`
         padding-top: var(--altura-header-desktop);
     }
 
+    ul, li {
+        list-style-type: none;
+    }
+
     a {
         text-decoration: none;
         color: var(--primaria);
@@ -72,6 +76,12 @@ const rootConfig = globalStyle`
     }
     a:hover {
         color: var(--secundaria);
+    }
+    a.ativo {
+        color: var(--secundaria);
+    }
+    a.ativo:hover {
+        color: var(--primaria-dark);
     }
 
     @media screen and (max-width: 768px) {

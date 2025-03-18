@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../../../../public/checklist.svg";
+import NavBar from "../NavBar";
 import style from "./index.module.css";
 
 function Header() {
@@ -12,7 +13,7 @@ function Header() {
             </Link>
 
             {/* Container de links de navegação */}
-            {/* <NavBar /> */}
+            <NavBar />
         </header>
     )
 }

@@ -1,0 +1,76 @@
+.navbar {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.navbar > button {
+    width: 3rem;
+    height: 3rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gray-100);
+    border: 2px solid var(--primaria);
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.menu {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.lista {
+    display: flex;
+    gap: 1rem;
+    list-style-type: none;
+}
+
+/* BEFORE com conteudo: Para não perder a acessibilidade das listas */
+.lista li::before {
+    content: "g"; 
+    content: "+";
+}
+.lista li::before {
+    content: "\200B";
+}
+
+.item {
+    padding: 0.5rem;
+}
+
+/* MOBILE */
+@media screen and (max-width: 768px) {
+    .navbar > button {
+        display: flex;
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .lista {
+        background-color: var(--gray-100);
+        position: absolute;
+        right: 0;
+        margin-right: -300dvw;
+        top: var(--altura-header-mobile);
+        min-height: 100dvh;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 1rem;
+        transition: all .3s ease-out;
+    }
+
+    .lista.ativa {
+        left: 0;
+        margin-right: 0dvw;
+        gap: 0.5rem;
+    }
+
+    .lista li {
+        display: flex;
+    }
+
+    .item {
+        padding: 1rem;
+    }
+}
