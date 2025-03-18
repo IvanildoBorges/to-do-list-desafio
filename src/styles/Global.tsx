@@ -19,10 +19,10 @@ const rootConfig = globalStyle`
         
         /* Cor */
         /* Produto */
-        --blue-dark: #1E6F9F;
-        --blue: #4EA8D3;
-        --purple-dark: #5E60CE;
-        --purple: #8284FA;
+        --primaria: #FC6E51;
+        --secundaria: #8284FA;
+        --primaria-dark: #1E6F9F;
+        --secundaria-dark: #5E60CE;
 
         /* Escala de Cinza */
         --gray-100: #F2F2F2;
@@ -35,6 +35,10 @@ const rootConfig = globalStyle`
 
         /* Feedback */
         --danger: #E25858;
+
+        /* Dimensões e espaçamentos */
+        --altura-header-desktop: 6rem;  /* 96px */
+        --altura-header-mobile: 4rem;   /* 64px */
     }
 
     body, input, button, textarea {
@@ -54,6 +58,26 @@ const rootConfig = globalStyle`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         -webkit-text-size-adjust: 100%;
+    }
+
+    .container {
+        padding-top: var(--altura-header-desktop);
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--primaria);
+        font-weight: var(--fonte-negrita);
+        transition: all .3s ease-in-out
+    }
+    a:hover {
+        color: var(--secundaria);
+    }
+
+    @media screen and (max-width: 768px) {
+        .container {
+            padding-top: var(--altura-header-mobile);
+        }
     }
 `;
 

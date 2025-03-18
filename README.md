@@ -7,6 +7,7 @@ Página web para criação e controle de tarefas
 - React
 - Typescript
 - Styled-Components
+- CSS Modules
 - React Router DOM
 
 ### Como rodar o projeto
