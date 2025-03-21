@@ -47,6 +47,7 @@
     .header {
         height: var(--altura-header-mobile);
         padding: 0 1rem;
+        z-index: 20;
     }
 
     .box-logo {

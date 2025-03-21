@@ -9,6 +9,8 @@ Página web para criação e controle de tarefas
 - Styled-Components
 - CSS Modules
 - React Router DOM
+- UUID
+- Axios
 
 ### Como rodar o projeto
 

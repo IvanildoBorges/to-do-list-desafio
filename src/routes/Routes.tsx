@@ -4,15 +4,15 @@ import {
     Routes
 } from 'react-router-dom';
 import Header from '../components/layout/Header';
+import Home from '../pages/home';
  
 export function AppRoutes() {
     return (
         <Router>
             <Header />
             <Routes>
-                <Route path='/' element={ <h1 className='container'>Olá mundo!</h1> } />
-                {/* <Route path='/' element={ <Home /> } />
-                <Route path="*" element={ <NotFound /> } /> */}
+                <Route path='/' element={ <Home /> } />
+                {/* <Route path="*" element={ <NotFound /> } /> */}
             </Routes>
         </Router>
     )

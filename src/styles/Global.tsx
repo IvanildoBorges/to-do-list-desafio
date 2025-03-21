@@ -1,13 +1,7 @@
 import { createGlobalStyle as globalStyle } from "styled-components";
 
 const rootConfig = globalStyle`
-    * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
-    
-    :root {
+   :root {
         /* Fonte */
         --familia: "Poppins", sans-serif;
         --estilo: normal;
@@ -23,6 +17,7 @@ const rootConfig = globalStyle`
         --secundaria: #8284FA;
         --primaria-dark: #9f581e;
         --secundaria-dark: #5E60CE;
+        --terciaria: #4ed399;
 
         /* Escala de Cinza */
         --gray-100: #F2F2F2;
@@ -34,14 +29,14 @@ const rootConfig = globalStyle`
         --gray-700: #0D0D0D;
 
         /* Feedback */
-        --danger: #E25858;
+        --atencao: #E25858;
 
         /* Dimensões e espaçamentos */
         --altura-header-desktop: 6rem;  /* 96px */
         --altura-header-mobile: 4rem;   /* 64px */
     }
 
-    body, input, button, textarea {
+    body, input, textarea {
         font-family: var(--familia);
         font-weight: var(--fonte-normal);
         font-style: var(--estilo);
@@ -60,8 +55,10 @@ const rootConfig = globalStyle`
         -webkit-text-size-adjust: 100%;
     }
 
-    .container {
+    .conteiner {
+        margin: 0 auto;
         padding-top: var(--altura-header-desktop);
+        width: 64rem;
     }
 
     ul, li {
@@ -85,8 +82,9 @@ const rootConfig = globalStyle`
     }
 
     @media screen and (max-width: 768px) {
-        .container {
+        .conteiner {
             padding-top: var(--altura-header-mobile);
+            width: 90%;
         }
     }
 `;

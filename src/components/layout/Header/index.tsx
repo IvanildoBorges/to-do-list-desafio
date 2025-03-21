@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../../../../public/checklist.svg";
+import logo from "../../../assets/checklist.svg";
 import NavBar from "../NavBar";
 import style from "./index.module.css";
 
