@@ -8,6 +8,7 @@ Página web para criação e controle de tarefas
 - Typescript
 - Styled-Components
 - CSS Modules
+- Tailwind CSS
 - React Router DOM
 - UUID
 - Axios

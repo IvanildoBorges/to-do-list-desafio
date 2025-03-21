@@ -26,6 +26,7 @@ const Modal = styled.div`
         justify-content: center;
         align-items: center;
         transition: all .2s ease-in;
+        z-index: 21;
     }
 
     @media screen and (max-width: 768px) {
