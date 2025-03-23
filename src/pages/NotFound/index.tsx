@@ -32,7 +32,7 @@ const NotFound: React.FC = () => {
                 {/* Bolinha que "quica" */}
                 <div
                     ref={ballRef}
-                    className="w-12 h-12 bg-[var(--terciaria)] rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-bounce"
+                    className="w-12 h-12 bg-[var(--terciaria)] rounded-full absolute top-1/1 left-1/2 transform -translate-x-1/2 -translate-y-9 animate-bounce"
                     style={{
                         animationDuration: "1s",
                     }}
