@@ -55,11 +55,11 @@ export default function Home() {
 
   return (
       <main className="conteiner grid grid-cols-1 pb-16 gap-[3rem] lg:gap-[4rem] lg:pb-24">
-        <TarefaComponente lista={listaDeTarefas} setLista={setListaDeTarefas} />
+        <TarefaComponente lista={listaDeTarefas} setLista={setListaDeTarefas} setLoading={setCarregando} setTextoLoading={setTextoAnimado} />
         {carregando
           ? (
             <div className="flex flex-col items-center">
-              <h2 className={"tremulante text-[var(--terciaria)] font-[var(--fonte-negrita)] text-center"}>
+              <h2 className={"text-[var(--terciaria)] font-[var(--fonte-negrita)] text-center"}>
                 {textoAnimado.split("").map((letra, index) => (
                   <span key={index} style={{ animationDelay: `${index * 150}ms` }}>
                     {letra}

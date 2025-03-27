@@ -58,11 +58,13 @@ const Input = styled.input`
     }
 `;
 
-export function TarefaComponente({ lista, setLista }: NovaTarefa) {
+export function TarefaComponente({ lista, setLista, setLoading, setTextoLoading }: NovaTarefa) {
     const [novaTarefa, setNovaTarefa] = useState<string | null>(null);
 
     async function criarNovaTarefa(event: FormEvent) {
         event.preventDefault();
+        setLoading(true); // Ativa o loading
+        setTextoLoading("Criando sua tarefa... 📋");
 
         if (novaTarefa && novaTarefa.trim() && setLista !== undefined) {
             const tarefaParaEnviar: Tarefa = new Tarefa(novaTarefa);
@@ -71,7 +73,12 @@ export function TarefaComponente({ lista, setLista }: NovaTarefa) {
                 setLista([...lista, tarefa]);   // nova lista criada
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (error: any) {
-                alert(error.message);
+                setTextoLoading(error.message);
+            } finally {
+                setTimeout(() => {
+                    setTextoLoading("");
+                    setLoading(false);
+                  }, 2000);
             }
         } else {
             alert("Digite uma tarefa por favor!");
