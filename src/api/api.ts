@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from 'axios';
 import { InterfaceTarefa, Tarefa } from '../models/Tarefa';
-
-const API_URL = 'http://localhost:3000';
+import env from '../utils/env';
 
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: `${env.API_URL}:${env.PORT}`,
   headers: {
     'Content-Type': 'application/json',
   },

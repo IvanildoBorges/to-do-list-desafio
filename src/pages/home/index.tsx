@@ -15,6 +15,7 @@ export default function Home() {
   const [listaDeTarefas, setListaDeTarefas] = useState<Tarefa[]>([]);
   const [modalAtivo, setModalAtivo] = useState<boolean>(false);
   const [carregando, setCarregando] = useState<boolean>(true);
+  const [textoAnimado, setTextoAnimado] = useState<string>("Não se preocupe! Estamos buscando suas tarefas... 😎");
 
   function apagarTodasTarefas(): void {
     const mensagem: string = listaDeTarefas.length > 1 ? "tarefas" : "tarefa";
@@ -40,9 +41,12 @@ export default function Home() {
         }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
-        alert(error.message);
+        console.log(error.message);
       } finally {
-        setCarregando(false); // Desativa o loading
+        setTimeout(() => {
+          setTextoAnimado("");
+          setCarregando(false);
+        }, 3000);
       }
     }
 
@@ -55,7 +59,13 @@ export default function Home() {
         {carregando
           ? (
             <div className="flex flex-col items-center">
-              <h2 className="text-[var(--terciaria)]">Carregando tarefas...</h2>
+              <h2 className={"tremulante text-[var(--terciaria)] font-[var(--fonte-negrita)] text-center"}>
+                {textoAnimado.split("").map((letra, index) => (
+                  <span key={index} style={{ animationDelay: `${index * 150}ms` }}>
+                    {letra}
+                  </span>
+                ))}
+              </h2>
               <Loading />
             </div>
           )
@@ -101,9 +111,9 @@ export default function Home() {
                       alt="Icone de lista vazia" 
                     />
                     <p className="text-[var(--gray-300)] font-[var(--fonte-negrita)] text-center">
-                      Você ainda não tem tarefas cadastradas
+                      Você ainda não tem tarefas 🥲
                     </p>
-                    <span className="text-[var(--gray-300)] font-[var(fonte-normal)]">Crie tarefas e organize seus itens a fazer</span>
+                    <span className="text-[var(--gray-300)] text-center font-[var(fonte-normal)]">Adicione tarefas e organize seus itens a fazer</span>
                   </div>
               )
         }
