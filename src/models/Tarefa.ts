@@ -6,25 +6,37 @@ export interface PropsTarefa {
     setLista: React.Dispatch<React.SetStateAction<Tarefa[]>>;
 }
 
-interface InterfaceTarefa {
+export interface InterfaceTarefa {
     id?: string;
     descricao: string;
     concluida?: boolean;
+    criadoEm?: Date;
+    atualizadoEm?: Date;
 }
 
 export class Tarefa {
     private id: string;
     private descricao: string;
     private concluida: boolean;
+    private criadoEm?: Date;
+    private atualizadoEm?: Date;
 
-    constructor(descricao: string, concluida: boolean = false,  id?: string){
+    constructor(descricao: string, concluida?: boolean,  id?: string, criadoEm?: Date, atualizadoEm?: Date){
         this.id = id || uuidv4(); // Se não houver ID, gera um novo
         this.descricao = descricao;
-        this.concluida = concluida;
+        this.concluida = concluida || false;
+        this.criadoEm = criadoEm;
+        this.atualizadoEm = atualizadoEm;
     };
 
     static fromJSON(json: InterfaceTarefa): Tarefa {
-        return new Tarefa(json.descricao, json.concluida, json.id);
+        return new Tarefa(
+            json.descricao, 
+            json.concluida, 
+            json.id, 
+            json.criadoEm, 
+            json.atualizadoEm
+        );
     }
 
     getId(): string {
@@ -33,6 +45,14 @@ export class Tarefa {
 
     getDescricao(): string {
         return this.descricao;
+    }
+
+    getCriadoEm(): Date | undefined {
+        return this.criadoEm;
+    }
+
+    getAtualizadoEm(): Date | undefined {
+        return this.atualizadoEm;
     }
     
     setDescricao(descricao: string): void {

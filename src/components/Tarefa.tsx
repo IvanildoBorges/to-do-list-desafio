@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from "styled-components";
-import { PropsTarefa } from "../models/Tarefa";
+import { atualizarTarefa, deletarTarefaPorId } from "../api/api";
+import { PropsTarefa, Tarefa } from "../models/Tarefa";
 
 const ItemTarefa = styled.div`
     &.tarefa-item {
@@ -110,25 +112,40 @@ export function TarefaItem({
     lista,
     setLista
 }: PropsTarefa) {
-    function alternarConclusao(): void {
-        const novasTarefas = lista.map((item) => {
-            if (item.getId() === tarefa.getId()) {
-                item.setConcluida(!item.isConcluida());
+    async function alternarConclusao(): Promise<void> {
+        try {
+            // Atualizando a lista localmente
+            const novasTarefas: Tarefa[] = lista.map((item) => {
+                if (item.getId() === tarefa.getId()) {
+                    item.setConcluida(!item.isConcluida());
+                }
+                return item;
+            });
+
+             // Chamada à API para atualizar no backend
+            const sucesso: boolean = await atualizarTarefa(tarefa.getId(), tarefa);
+
+            // Atualizando o estado da lista para refletir a alteração
+            if (sucesso) {
+                setLista(novasTarefas);
             }
-            return item;
-        });
-        setLista([...novasTarefas]); // Força o React a re-renderizar
+        } catch (error: any) {
+            alert(error.message);
+        }
     }
 
-    function excluirTarefa(id: string): void {
-        if (!tarefa.isConcluida() && !confirm(`Deseja mesmo excluir a tarefa ${tarefa.getDescricao()}?`)) {
-            return;
-        };
+    async function excluirTarefa(id: string): Promise<void> {
+        try {
+            if (!tarefa.isConcluida() && !confirm(`Deseja mesmo excluir a tarefa ${tarefa.getDescricao()}?`)) return;
 
-        // axios.delete(`/tarefas/${id}`).then(() => {
-        //     setLista(lista.filter((item) => item.getId() !== id));
-        // });
-        setLista(lista.filter((item) => item.getId() !== id));
+            const resposta: string = await deletarTarefaPorId(id);
+
+            if (resposta) {
+                setLista(lista.filter((item) => item.getId() !== id));
+            }
+        } catch (error: any) {
+            alert(error.message);
+        }
     }
     
     return (

@@ -5,6 +5,7 @@ import {
     useState
 } from "react";
 import styled from "styled-components";
+import { criarTarefa } from "../api/api";
 import { NovaTarefa } from "../models/NovaTarefa";
 import { Tarefa } from "../models/Tarefa";
 import ButtonCTA from "./ButtonCTA";
@@ -58,13 +59,20 @@ const Input = styled.input`
 `;
 
 export function TarefaComponente({ lista, setLista }: NovaTarefa) {
-    const [novaTarefa, setNovaTarefa] = useState<Tarefa | null>(null);
+    const [novaTarefa, setNovaTarefa] = useState<string | null>(null);
 
-    function criarNovaTarefa(event: FormEvent) {
+    async function criarNovaTarefa(event: FormEvent) {
         event.preventDefault();
 
-        if (novaTarefa && novaTarefa.getDescricao().trim() && setLista !== undefined) {
-            setLista([...lista, new Tarefa(novaTarefa.getDescricao())]); // nova lista criada
+        if (novaTarefa && novaTarefa.trim() && setLista !== undefined) {
+            const tarefaParaEnviar: Tarefa = new Tarefa(novaTarefa);
+            try {
+                const tarefa: Tarefa = await criarTarefa(tarefaParaEnviar);
+                setLista([...lista, tarefa]);   // nova lista criada
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } catch (error: any) {
+                alert(error.message);
+            }
         } else {
             alert("Digite uma tarefa por favor!");
         }
@@ -73,7 +81,7 @@ export function TarefaComponente({ lista, setLista }: NovaTarefa) {
 
     function carregaNovaTarefa(event: ChangeEvent<HTMLInputElement>) {
         event.target.setCustomValidity("");
-        setNovaTarefa(new Tarefa(event.target.value));
+        setNovaTarefa(event.target.value);
     }
 
     function tarefaInvalida(event: InvalidEvent<HTMLInputElement>) {
@@ -88,14 +96,14 @@ export function TarefaComponente({ lista, setLista }: NovaTarefa) {
             name="tarefas" 
             id="campo-tarefas"
             placeholder="Adicione uma nova tarefa..."
-            value={novaTarefa ? novaTarefa.getDescricao() : ""}
+            value={novaTarefa ? novaTarefa : ""}
             onChange={carregaNovaTarefa}
             onInvalid={tarefaInvalida}
           />
           <footer>
                 <ButtonCTA  
                     tipo="submit"
-                    tarefa={novaTarefa ? novaTarefa.getDescricao() : ""}
+                    tarefa={novaTarefa ? novaTarefa : ""}
                     texto="Adicionar"
                     icone={<span className="material-icons">add</span>}
                 />
