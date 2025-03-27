@@ -62,28 +62,29 @@ export function TarefaComponente({ lista, setLista, setLoading, setTextoLoading 
     const [novaTarefa, setNovaTarefa] = useState<string | null>(null);
 
     async function criarNovaTarefa(event: FormEvent) {
-        event.preventDefault();
-        setLoading(true); // Ativa o loading
-        setTextoLoading("Criando sua tarefa... 📋");
-
-        if (novaTarefa && novaTarefa.trim() && setLista !== undefined) {
-            const tarefaParaEnviar: Tarefa = new Tarefa(novaTarefa);
-            try {
+        try {
+            event.preventDefault();
+            setLoading(true); // Ativa o loading
+            
+            if (novaTarefa && novaTarefa.trim() && setLista !== undefined) {
+                const tarefaParaEnviar: Tarefa = new Tarefa(novaTarefa);
+                setTextoLoading("Criando sua tarefa... 📋");
+    
                 const tarefa: Tarefa = await criarTarefa(tarefaParaEnviar);
                 setLista([...lista, tarefa]);   // nova lista criada
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } catch (error: any) {
-                setTextoLoading(error.message);
-            } finally {
-                setTimeout(() => {
-                    setTextoLoading("");
-                    setLoading(false);
-                  }, 2000);
+            } else {
+                setTextoLoading("Digite uma tarefa por favor!");
             }
-        } else {
-            alert("Digite uma tarefa por favor!");
+            setNovaTarefa(null);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            setTextoLoading(error.message);
+        } finally {
+            setTimeout(() => {
+                setTextoLoading("");
+                setLoading(false);
+            }, 2000);
         }
-        setNovaTarefa(null);
     }
 
     function carregaNovaTarefa(event: ChangeEvent<HTMLInputElement>) {
