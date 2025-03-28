@@ -34,7 +34,12 @@ cd to-do-list-desafio
 npm install
 ```
 
-### 3️⃣ Executar o projeto
+### 3️⃣ Crie um arquivo na raiz do projeto chamado de .env que pode ser http://localhost:3000 ou o endpoint da API na nuvem
+```bash
+VITE_API_URL=sua_url
+```
+
+### 4️⃣ Executar o projeto
 
 ```bash
 npm run dev
