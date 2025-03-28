@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from 'axios';
 import { InterfaceTarefa, Tarefa } from '../models/Tarefa';
-import env from '../utils/env';
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const api = axios.create({
-  baseURL: `${env.API_URL}:${env.PORT}`,
+  baseURL: apiUrl,
   headers: {
     'Content-Type': 'application/json',
   },
